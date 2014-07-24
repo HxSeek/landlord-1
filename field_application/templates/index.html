@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>场地申请首页</title>	
+</head>
+    <body>
+				
+    {% if user.is_authenticated %}
+				
+    <li><strong>{{ user.organization.chinese_name }}</strong></li>
+				
+    <li>				
+        <a href="{% url 'account:signout' %}">注销</a>
+	<a href="{% url 'account:reset_password' %}">修改密码</a>
+	{% else %}
+	<a href="{% url 'account:signin' %}">登录</a>
+	<a href="{% url 'account:signup' %}">注册</a>
+	{% endif %}
+    </li>
+
+    </body>
+</html>

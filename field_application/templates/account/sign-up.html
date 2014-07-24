@@ -1,0 +1,43 @@
+<html>
+    <body>
+
+    <form action="{% url 'account:signup' %}" method="POST" >
+    {% csrf_token %}
+   
+            <label class="item">部门名称</label>
+            {{ form.chinese_name }}
+    
+            <label class="item">部门英文名称</label>
+            {{ form.username }}
+            </label>            
+       
+            <label class="item">密码</label>
+            {{ form.password1 }}
+       
+            <label class="item">密码确认</label>
+            {{ form.password2 }}
+            
+        
+            <label class="item">主管单位</label>
+            {{ form.org_in_charge }}
+       
+            <label class="item">指导老师</label>
+            {{ form.tutor }}
+                
+        
+            <label class="item">指导老师联系方式</label>
+            {{ form.tutor_contact_infor }}
+
+            <label class="item">组织负责人</label>
+            {{ form.director }}
+            
+            <label class="item">负责人联系方式</label>
+            {{ form.director_contact_infor }}
+       
+            <label class="item">所属部门</label>
+            {{ form.belong_to }}
+            
+            <input type="submit" value="提交">
+
+    </body>
+</html>
