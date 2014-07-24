@@ -1,0 +1,23 @@
+<html>
+
+    <body>
+
+        {% for app in page %}
+           <a href="{% url 'models:modify' %}?id={{ app.id }}">
+                编辑
+           </a>
+        {% endfor %}
+
+        {% if page.has_previous %}
+        <a href="?page={{ page.previous_page_number }}">previous</a>
+        {% endif %}
+
+        Page {{ page.number }} of {{ page.paginator.num_pages }}.
+       
+        {% if page.has_next %}
+        <a href="?page={{ page.next_page_number }}">next</a>
+        {% endif %}
+
+    </body>
+
+</html>
