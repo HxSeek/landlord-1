@@ -33,9 +33,9 @@ class RoomApplication(models.Model):
     applicant_stu_id = models.CharField(max_length=15)
     applicant_college = models.CharField(max_length=50)
     applicant_phone_number = models.CharField(max_length=30)
+    application_time = models.DateTimeField(auto_now_add=True)
     remarks = models.CharField(max_length=300, blank=True, null=True)
     approved = models.BooleanField(default=False)
-    application_time = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     
     class Meta:
