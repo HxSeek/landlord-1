@@ -19,6 +19,8 @@ LANGUAGES = (
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+LOGIN_URL = '/account/signin/'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )

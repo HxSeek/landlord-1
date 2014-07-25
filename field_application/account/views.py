@@ -13,17 +13,20 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView, ListView
 
+from field_application.custom.decorators import guest_or_redirect
 from field_application.account.forms import SignInForm, SignUpForm
 from field_application.account.models import Organization
 from field_application.account.forms import EditForm
 
 
 class SignInView(View):
-
+    
+    @method_decorator(guest_or_redirect)
     def get(self, request):
         return render(request, 'account/sign-in.html',
                               {'form':  SignInForm()})
-
+    
+    @method_decorator(guest_or_redirect)
     def post(self, request):
         form =  SignInForm(data=request.POST)
         if form.is_valid():
@@ -35,10 +38,12 @@ class SignInView(View):
 
 class SignUpView(View):
     
+    @method_decorator(guest_or_redirect)
     def get(self, request):
         return render(request, 'account/sign-up.html',
                               {'form': SignUpForm()})
     
+    @method_decorator(guest_or_redirect)
     def post(self, request):
         form = SignUpForm(request.POST)
         if form.is_valid():
