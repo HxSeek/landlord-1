@@ -12,7 +12,7 @@ class StudentActivityCenterApplicationForm(ModelForm):
 
     class Meta:
         model = StudentActivityCenterApplication
-        exclude = ['organization', 'approved', 'application_time']
+        exclude = ['organization', 'approved', 'application_time', 'deleted']
         widgets = {
             'activity_summary': Textarea(),
         }

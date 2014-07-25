@@ -141,6 +141,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'field_application.account',
+    'field_application.models',
+    'field_application.student_activity_center',
 )
 
 # A sample logging configuration. The only tangible logging

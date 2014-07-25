@@ -13,10 +13,8 @@ urlpatterns = patterns('',
                name='home'),
     url(r'^account/', include('field_application.account.urls',
                               namespace='account')),
-
-    url(r'^student_activity_center/',
-        include('field_application.models.urls',
-                namespace='student_activity_center')),
+    url(r'^room/', include('field_application.models.urls',
+                              namespace='models')),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),

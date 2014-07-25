@@ -5,19 +5,17 @@ from .views import ApplyRoomView, ListView, ModifyView
 from field_application.student_activity_center.forms import StudentActivityCenterApplicationForm
 from field_application.student_activity_center.models import StudentActivityCenterApplication
 
-urlpatterns = patterns(
-    '',
-    url(r'^apply/$', ApplyRoomView.as_view(),
-               { 'form' : StudentActivityCenterApplicationForm,
-                 'name' : 'Stuapply' }, name='Stuapply'),
+urlpatterns = patterns('',
 
-    url(r'^list/$', ListView.as_view(), 
+    url(r'^apply/student_activity_center/$', ApplyRoomView.as_view(),
+               { 'appform' : StudentActivityCenterApplicationForm }, name='apply1'),
+
+    url(r'^list/student_activity_center/$', ListView.as_view(), 
     	       { 'model' : StudentActivityCenterApplication }, name='Stulist'),
 
-    url(r'^modify/$', ModifyView.as_view(),
-               { 'form' : StudentActivityCenterApplicationForm,
-                 'model' : StudentActivityCenterApplication,
-                 'name' : 'Stumodify' }, name='Stumodify'),
+    url(r'^modify/student_activity_center/$', ModifyView.as_view(),
+               { 'appform' : StudentActivityCenterApplicationForm,
+                 'model' : StudentActivityCenterApplication }, name='Stumodify'),
     )
     
    
