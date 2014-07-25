@@ -6,9 +6,10 @@ from django.db import models
 
 from field_application.account.models import Organization 
 from field_application.models.models import RoomApplication
+from field_application.models.mixin import DateMixin
 
 
-class StudentActivityCenterApplication(RoomApplication):
+class StudentActivityCenterApplication(RoomApplication, DateMixin):
 
     activity = models.CharField(max_length=30)
     activity_summary = models.CharField(max_length=200)
@@ -17,6 +18,9 @@ class StudentActivityCenterApplication(RoomApplication):
     sponsorship_usage = models.CharField(max_length=40, blank=True, null=True)
     
     def save(self):
+        
+        self.clean_date()
+
         super(StudentActivityCenterApplication, self).save()
 
 

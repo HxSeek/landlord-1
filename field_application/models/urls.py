@@ -5,8 +5,8 @@ from .views import ApplyRoomView, ListView, ModifyView
 from field_application.student_activity_center.forms import StudentActivityCenterApplicationForm
 from field_application.student_activity_center.models import StudentActivityCenterApplication
 
-urlpatterns = patterns('',
-
+urlpatterns = patterns(
+    '',
     url(r'^apply/student_activity_center/$', ApplyRoomView.as_view(),
                { 'appform' : StudentActivityCenterApplicationForm }, name='apply1'),
 
