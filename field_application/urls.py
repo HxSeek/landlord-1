@@ -8,7 +8,8 @@ from field_application import settings
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', TemplateView.as_view(template_name='index.html'),
                name='home'),
     url(r'^account/', include('field_application.account.urls',

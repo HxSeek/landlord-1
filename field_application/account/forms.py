@@ -16,27 +16,11 @@ BELONG_TO_CHOICES = (
     ('校学生会','校学生会'),
     )
 
+
 class SignInForm(AuthenticationForm):
 
-    # 由于这部分django没有翻译，所以直接重写错误信息
+    username = forms.ModelChoiceField(queryset=Organization.objects.all())
 
-    # 注意这不是文档中有说明的接口，当前版本是1.5.1，可能会在新版本失效
-
-    error_messages = {
-        'invalid_login': u'请输入正确的组织名和密码',
-        'inactive': u'该帐号处于停用状态',
-    }
-
-    username = forms.ModelChoiceField(queryset=Organization.objects.all(),
-                                      empty_label=u'')
-
-    def clean_username(self):
-        ''' change Organization.chinese_name to User.username '''
-        org = Organization.objects.get(
-                chinese_name=self.cleaned_data['username'])
-        if org.is_banned and not org.user.has_perm('account.manager'):
-            raise forms.ValidationError(u'该用户已被禁止使用')
-        return org.user.username
 
 class SignUpForm(UserCreationForm):
 

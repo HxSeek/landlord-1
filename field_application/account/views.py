@@ -13,31 +13,31 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView, ListView
 
-from field_application.account.forms import SignUpForm, SignInForm
+from field_application.account.forms import SignInForm, SignUpForm
 from field_application.account.models import Organization
 from field_application.account.forms import EditForm
 
 
 class SignInView(View):
- 
+
     def get(self, request):
-        return render(request, 'account/sign-in.html', 
-                      {'form': SignInForm()})
+        return render(request, 'account/sign-in.html',
+                              {'form':  SignInForm()})
 
     def post(self, request):
-        form = SignInForm(data=request.POST)
-        if not form.is_valid():
-            return render(request, 'account/sign-in.html', {'form': form})
-        user = form.get_user()
-        login(request, user)
-        return HttpResponseRedirect(reverse('home'))
+        form =  SignInForm(data=request.POST)
+        if form.is_valid():
+            login(request, form.get_user())
+            return HttpResponseRedirect(reverse('home'))
+
+        return render(request, 'account/sign-in.html', {'form': form})
 
 
 class SignUpView(View):
     
     def get(self, request):
         return render(request, 'account/sign-up.html',
-                      {'form': SignUpForm()})
+                              {'form': SignUpForm()})
     
     def post(self, request):
         form = SignUpForm(request.POST)
@@ -49,12 +49,14 @@ class SignUpView(View):
 
 
 class SignOutView(View):
+
     def get(self, request):
         logout(request)
         return HttpResponseRedirect(reverse('home'))
 
 
 class ResetPasswordView(View):
+
     @method_decorator(login_required)
     def get(self, request):
         return render(request, 'account/reset-password.html',
