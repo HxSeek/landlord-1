@@ -14,7 +14,7 @@ class ApplyRoomView(View):
     def get(self, request, appform):
          return render(request, 'room/form.html', 
                                {'form': appform(),
-                                'post_url': reverse('models:apply1') })
+                                'post_url': reverse('models:Stuapply') })
 
     @method_decorator(login_required)
     def post(self, request, appform):
@@ -22,8 +22,8 @@ class ApplyRoomView(View):
         if not form.is_valid():
             return render(request, 'room/form.html', 
                                   {'form': form(),
-                                   'post_url': reverse('models:apply1') })
-        form.save()
+                                   'post_url': reverse('models:Stuapply') })
+        form.submit()
         return HttpResponseRedirect(reverse('home'))
 
 
@@ -64,5 +64,5 @@ class ModifyView(View):
           return render(request, 'mroom/form.html', 
                                 {'form': form(), 'app_id': app_id, 
                                  'post_url': reverse('models:Stumodify') +'?id='+app_id})
-      form.save()
+      form.submit()
       return HttpResponseRedirect(reverse('home'))

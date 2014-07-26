@@ -41,8 +41,8 @@ class RoomApplication(models.Model):
     class Meta:
         abstract = True
 
-    def save(self):
-        pass           
+    def submit(self):
+        return self.save()
 
 
      

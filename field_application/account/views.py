@@ -65,14 +65,14 @@ class ResetPasswordView(View):
     @method_decorator(login_required)
     def get(self, request):
         return render(request, 'account/reset-password.html',
-                      {'form': PasswordChangeForm(user=request.user)})
+                              {'form': PasswordChangeForm(user=request.user)})
 
     @method_decorator(login_required)
     def post(self, request):
         form = PasswordChangeForm(request.user, request.POST)
         if not form.is_valid():
             return render(request, 'account/reset-password.html',
-                          {'form': form})
+                                  {'form': form})
         form.save()
         return HttpResponseRedirect(reverse('home'))
 
