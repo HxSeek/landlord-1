@@ -1,8 +1,9 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from datetime import datetime, timedelta, date
 
 from django.db import models
 from django.core.exceptions import ValidationError
+
 
 class DateMixin(models.Model):
 
@@ -10,7 +11,7 @@ class DateMixin(models.Model):
 
     class Meta:
         abstract = True
-    
+
     def clean_date(self):
         date = self.date
         now = datetime.now().date()
@@ -19,4 +20,3 @@ class DateMixin(models.Model):
         if date >= now + timedelta(days=14):
             raise ValidationError(u'申请的场地使用时间距离现在不能超过14天')
         return date
-

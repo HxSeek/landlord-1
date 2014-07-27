@@ -4,7 +4,10 @@ from landlord.student_activity_center.models import StudentActivityCenterApplica
 
 
 class StudentActivityCenterApplicationAdmin(admin.ModelAdmin):
-	list_display = ('organization', 'applicant_name')
+    list_display = ('organization', 'applicant_name')
 
-admin.site.register(StudentActivityCenterApplication, StudentActivityCenterApplicationAdmin)
 
+admin.site.register(
+    StudentActivityCenterApplication,
+    StudentActivityCenterApplicationAdmin,
+)

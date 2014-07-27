@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -23,5 +23,5 @@ class Organization(models.Model):
     is_banned = models.BooleanField(default=True)
 
     def __unicode__(self):
-        '''  used in account.SignUpForm to display username '''
+        '''used in account.SignUpForm to display username'''
         return self.chinese_name
