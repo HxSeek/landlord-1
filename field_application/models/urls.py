@@ -8,7 +8,8 @@ from field_application.student_activity_center.models import StudentActivityCent
 urlpatterns = patterns(
     '',
     url(r'^apply/student_activity_center/$', ApplyRoomView.as_view(),
-               { 'appform' : StudentActivityCenterApplicationForm }, name='Stuapply'),
+               { 'appform' : StudentActivityCenterApplicationForm, 
+                 'model' : StudentActivityCenterApplication }, name='Stuapply'),
 
     url(r'^list/student_activity_center/$', ListView.as_view(), 
     	       { 'model' : StudentActivityCenterApplication }, name='Stulist'),

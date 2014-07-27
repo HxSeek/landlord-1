@@ -18,9 +18,8 @@ class StudentActivityCenterApplication(RoomApplication, DateMixin):
     sponsorship_usage = models.CharField(max_length=40, blank=True, null=True)
     
     def submit(self):
-        
+
         self.clean_date()
-        print 'aaa'
 
         return self.save()
 

@@ -6,7 +6,6 @@ from django.forms import Textarea
 
 from .models import StudentActivityCenterApplication
 
-
 class StudentActivityCenterApplicationForm(ModelForm):
 
     class Meta:

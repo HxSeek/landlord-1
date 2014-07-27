@@ -11,25 +11,27 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 class ApplyRoomView(View):
     
     @method_decorator(login_required)
-    def get(self, request, appform):
+    def get(self, request, appform, model):
          return render(request, 'room/form.html', 
-                               {'form': appform(),
+                               {'form': appform,
                                 'post_url': reverse('models:Stuapply') })
 
     @method_decorator(login_required)
-    def post(self, request, appform):
+    def post(self, request, appform, model):
         form = appform(request.POST)
         if not form.is_valid():
             return render(request, 'room/form.html', 
-                                  {'form': form(),
+                                  {'form': form,
                                    'post_url': reverse('models:Stuapply') })
-        form.submit()
+        model = form.save(commit=False)
+        model.organization = request.user.organization
+        model.submit()
         return HttpResponseRedirect(reverse('home'))
 
 
-class ListView(View):     
+class ListView(View):
     
-    def manage_list(request, model):
+    def get(self, request, model):
         app = model.objects.all()
         paginator = Paginator(app, 6)
         page = request.GET.get('page')
@@ -39,7 +41,7 @@ class ListView(View):
         except PageNotAnInteger:
             page = paginator.page(1)
         except EmptyPage:
-            page = paginator.page(paginator.num_pages)
+            page = paginator.page(paginator.num_pages)()
     
         return render(request, 'room/list.html', {'page': page})
 
@@ -51,8 +53,8 @@ class ModifyView(View):
       app_id = request.GET.get('id')
       app = get_object_or_404(model, id=app_id)
       form = appform(instance=app)
-      return render(request, 'mroom/form.html',
-                            {'form': form(), 'app_id': app_id,
+      return render(request, 'room/form.html',
+                            {'form': form, 'app_id': app_id,
                              'post_url': reverse('models:Stumodify') +'?id='+app_id})
     
     @method_decorator(login_required)
@@ -61,8 +63,9 @@ class ModifyView(View):
       app = get_object_or_404(model, id=app_id)
       form = appform(request.POST, instance=app)
       if not form.is_valid():
-          return render(request, 'mroom/form.html', 
-                                {'form': form(), 'app_id': app_id, 
+          return render(request, 'room/form.html', 
+                                {'form': form, 'app_id': app_id, 
                                  'post_url': reverse('models:Stumodify') +'?id='+app_id})
-      form.submit()
+      model = form.save(commit=False)
+      model.submit()
       return HttpResponseRedirect(reverse('home'))
