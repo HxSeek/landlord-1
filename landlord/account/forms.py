@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms import HiddenInput
 
-from field_application.account.models import Organization
+from landlord.account.models import Organization
 
 
 BELONG_TO_CHOICES = (

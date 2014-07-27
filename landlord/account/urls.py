@@ -3,8 +3,8 @@ from django.conf.urls import url, patterns
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 
-from field_application.account.views import SignOutView, SignInView 
-from field_application.account.views import SignUpView, ResetPasswordView
+from landlord.account.views import SignOutView, SignInView 
+from landlord.account.views import SignUpView, ResetPasswordView
 
 
 urlpatterns = patterns(

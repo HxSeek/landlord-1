@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from field_application.account.models import Organization
+from landlord.account.models import Organization
 
 
 class OrganizationAdmin(admin.ModelAdmin):

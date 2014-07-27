@@ -120,13 +120,13 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'field_application.urls'
+ROOT_URLCONF = 'landlord.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'field_application.wsgi.application'
+WSGI_APPLICATION = 'landlord.wsgi.application'
 
 TEMPLATE_DIRS = (
-    path('field_application', 'templates'),
+    path('landlord', 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -142,9 +142,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'field_application.account',
-    'field_application.models',
-    'field_application.student_activity_center',
+    'landlord.account',
+    'landlord.models',
+    'landlord.student_activity_center',
 )
 
 # A sample logging configuration. The only tangible logging

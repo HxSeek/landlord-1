@@ -13,10 +13,10 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView, ListView
 
-from field_application.custom.decorators import guest_or_redirect
-from field_application.account.forms import SignInForm, SignUpForm
-from field_application.account.models import Organization
-from field_application.account.forms import EditForm
+from landlord.custom.decorators import guest_or_redirect
+from landlord.account.forms import SignInForm, SignUpForm
+from landlord.account.models import Organization
+from landlord.account.forms import EditForm
 
 
 class SignInView(View):

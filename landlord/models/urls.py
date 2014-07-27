@@ -2,8 +2,8 @@ from django.conf.urls import url, patterns
 
 from .views import ApplyRoomView, ListView, ModifyView
 
-from field_application.student_activity_center.forms import StudentActivityCenterApplicationForm
-from field_application.student_activity_center.models import StudentActivityCenterApplication
+from landlord.student_activity_center.forms import StudentActivityCenterApplicationForm
+from landlord.student_activity_center.models import StudentActivityCenterApplication
 
 urlpatterns = patterns(
     '',

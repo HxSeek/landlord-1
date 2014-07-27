@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError, PermissionDenied
 from django.contrib.auth.models import Group
 from django.utils import timezone
 
-from field_application.account.models import Organization
+from landlord.account.models import Organization
 
         
 class Room(models.Model):
