@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from datetime import datetime, timedelta, time
 
 from django.db import models
@@ -8,10 +8,10 @@ from django.utils import timezone
 
 from landlord.account.models import Organization
 
-        
+
 class Room(models.Model):
     """The meeting room entity."""
-    
+
     name = models.CharField(max_length=32)
     managers = models.ManyToManyField(Group)
 
@@ -21,7 +21,7 @@ class Room(models.Model):
     def judge_perms(self, managers, user):
         groups = user.groups.all()
         managers_list = [str(manager) for manager in managers.all()]
-       
+
         for group in groups:
             return bool(str(group) in managers_list)
 
@@ -37,15 +37,9 @@ class RoomApplication(models.Model):
     remarks = models.CharField(max_length=300, blank=True, null=True)
     approved = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
-    
+
     class Meta:
         abstract = True
 
     def submit(self):
         return self.save()
-
-
-     
-
-
-        

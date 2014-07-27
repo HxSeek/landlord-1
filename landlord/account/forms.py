@@ -1,5 +1,4 @@
-#-*- coding: utf-8 -*-
-
+# -*- coding: utf-8 -*-
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -11,19 +10,17 @@ from landlord.account.models import Organization
 
 
 BELONG_TO_CHOICES = (
-    ('其它','其它'),
-    ('社团联合会','社团联合会'),
-    ('校学生会','校学生会'),
-    )
+    ('其它', '其它'),
+    ('社团联合会', '社团联合会'),
+    ('校学生会', '校学生会'),
+)
 
 
 class SignInForm(AuthenticationForm):
-
     username = forms.ModelChoiceField(queryset=Organization.objects.all())
 
 
 class SignUpForm(UserCreationForm):
-
     chinese_name = forms.CharField(max_length=30)
     org_in_charge = forms.CharField(max_length=30)
     tutor = forms.CharField(max_length=20)
@@ -39,12 +36,11 @@ class SignUpForm(UserCreationForm):
         return chinese_name
 
     # force model to save
-
     def save(self):
         new_user = super(SignUpForm, self).save()
         org = Organization.objects.create(
             user=new_user,
-            chinese_name = self.cleaned_data['chinese_name'],
+            chinese_name=self.cleaned_data['chinese_name'],
             org_in_charge=self.cleaned_data['org_in_charge'],
             tutor=self.cleaned_data['tutor'],
             tutor_contact_infor=self.cleaned_data['tutor_contact_infor'],
@@ -57,6 +53,7 @@ class SignUpForm(UserCreationForm):
 
 class EditForm(forms.ModelForm):
     belong_to = forms.ChoiceField(choices=BELONG_TO_CHOICES)
+
     class Meta:
         model = Organization
         exclude = ('chinese_name', 'user', 'is_banned')

@@ -1,5 +1,4 @@
-#-*- coding: utf-8 -*-
-
+# -*- coding: utf-8 -*-
 from django.views.generic import View
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect
@@ -20,15 +19,15 @@ from landlord.account.forms import EditForm
 
 
 class SignInView(View):
-    
+
     @method_decorator(guest_or_redirect)
     def get(self, request):
         return render(request, 'account/sign-in.html',
-                              {'form':  SignInForm()})
-    
+                      {'form': SignInForm()})
+
     @method_decorator(guest_or_redirect)
     def post(self, request):
-        form =  SignInForm(data=request.POST)
+        form = SignInForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
             return HttpResponseRedirect(reverse('home'))
@@ -37,12 +36,12 @@ class SignInView(View):
 
 
 class SignUpView(View):
-    
+
     @method_decorator(guest_or_redirect)
     def get(self, request):
         return render(request, 'account/sign-up.html',
-                              {'form': SignUpForm()})
-    
+                      {'form': SignUpForm()})
+
     @method_decorator(guest_or_redirect)
     def post(self, request):
         form = SignUpForm(request.POST)
@@ -65,16 +64,13 @@ class ResetPasswordView(View):
     @method_decorator(login_required)
     def get(self, request):
         return render(request, 'account/reset-password.html',
-                              {'form': PasswordChangeForm(user=request.user)})
+                      {'form': PasswordChangeForm(user=request.user)})
 
     @method_decorator(login_required)
     def post(self, request):
         form = PasswordChangeForm(request.user, request.POST)
         if not form.is_valid():
             return render(request, 'account/reset-password.html',
-                                  {'form': form})
+                          {'form': form})
         form.save()
         return HttpResponseRedirect(reverse('home'))
-
-
-
