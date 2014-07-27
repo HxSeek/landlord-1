@@ -4,9 +4,9 @@ from datetime import datetime, timedelta, date
 
 from django.db import models
 
-from field_application.account.models import Organization 
-from field_application.models.models import RoomApplication
-from field_application.models.mixin import DateMixin
+from landlord.account.models import Organization 
+from landlord.models.models import RoomApplication
+from landlord.models.mixin import DateMixin
 
 
 class StudentActivityCenterApplication(RoomApplication, DateMixin):
