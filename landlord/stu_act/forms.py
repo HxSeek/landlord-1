@@ -3,13 +3,13 @@ from django.forms import ModelForm
 from django.forms.extras.widgets import SelectDateWidget
 from django.forms import Textarea
 
-from .models import StuActCenterApp
+from .models import StuActCenterApply
 
 
-class StuActCenterAppForm(ModelForm):
+class StuActCenterApplyForm(ModelForm):
 
     class Meta:
-        model = StuActCenterApp
+        model = StuActCenterApply
         exclude = ['organization', 'application_time', 'approved', 'deleted']
         widgets = {
             'date': SelectDateWidget(),

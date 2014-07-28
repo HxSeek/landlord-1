@@ -29,7 +29,7 @@ class Room(models.Model):
             return bool(str(group) in managers_list)
 
 
-class RoomApplication(models.Model):
+class RoomApply(models.Model):
 
     organization = models.ForeignKey(Organization)
     applicant_name = models.CharField(max_length=10)
