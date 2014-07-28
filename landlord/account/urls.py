@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url, patterns
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import permission_required
 
 from landlord.account.views import SignOutView, SignInView
 from landlord.account.views import SignUpView, ResetPasswordView

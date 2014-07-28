@@ -6,6 +6,7 @@ import django.conf.global_settings as DEFAULT_SETTINGS
 # Repository directory
 ROOT = os.path.dirname(os.path.dirname(__file__))
 
+
 # path bases things off of ROOT
 def path(*a):
     return os.path.abspath(os.path.join(ROOT, *a))
@@ -143,8 +144,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'landlord.account',
-    'landlord.models',
-    'landlord.student_activity_center',
+    'landlord.common',
+    'landlord.stu_act',
 )
 
 # A sample logging configuration. The only tangible logging

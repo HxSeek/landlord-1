@@ -15,8 +15,8 @@ urlpatterns = patterns(
         name='home'),
     url(r'^account/', include('landlord.account.urls',
         namespace='account')),
-    url(r'^room/', include('landlord.models.urls',
-        namespace='models')),
+    url(r'^room/', include('landlord.common.urls',
+        namespace='common')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
