@@ -7,7 +7,7 @@ from landlord.account.models import Organization
 
 class Room(models.Model):
     """The meeting room entity."""
-    FIELD = (
+    FIELDS = (
         ('stuact', '学生活动中心'),
         ('exhibit', '校园展览'),
         ('publicity', '校园露天'),
@@ -16,7 +16,7 @@ class Room(models.Model):
 
     name = models.CharField(max_length=32)
     managers = models.ManyToManyField(Group)
-    belong_to = models.CharField(max_length=10, choices=FIELD)
+    belong_to = models.CharField(max_length=10, choices=FIELDS)
 
     def __unicode__(self):
         return self.name
