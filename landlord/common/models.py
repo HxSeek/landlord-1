@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta, time
-
 from django.db import models
-from django.core.exceptions import ValidationError, PermissionDenied
 from django.contrib.auth.models import Group
 
 from landlord.account.models import Organization
@@ -10,9 +7,16 @@ from landlord.account.models import Organization
 
 class Room(models.Model):
     """The meeting room entity."""
+    FIELD = (
+        ('stuact', '学生活动中心'),
+        ('exhibit', '校园展览'),
+        ('publicity', '校园露天'),
+        ('mroom', '会议室'),
+    )
 
     name = models.CharField(max_length=32)
     managers = models.ManyToManyField(Group)
+    belong_to = models.CharField(max_length=10, choices=FIELD)
 
     def __unicode__(self):
         return self.name
