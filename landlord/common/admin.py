@@ -1,10 +1,10 @@
 from django.contrib import admin
 
 from landlord.common.models import Room
-from landlord.stu_act.models import StuActCenterApply
+from landlord.stu_act.models import StuActCenterApp
 
 
-class StuActCenterApplyAdmin(admin.ModelAdmin):
+class StuActCenterAppAdmin(admin.ModelAdmin):
     list_display = ('organization', 'applicant_name')
 
 
@@ -13,7 +13,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 
 admin.site.register(
-    StuActCenterApply, StuActCenterApplyAdmin,
+    StuActCenterApp, StuActCenterAppAdmin,
 )
 
 admin.site.register(

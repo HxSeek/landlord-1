@@ -2,12 +2,12 @@
 from django.db import models
 from django.db.models import Q
 
-from landlord.common.models import Room, RoomApply
+from landlord.common.models import Room, RoomApplication
 from landlord.common.mixin import DateMixin
 from landlord.custom.model_field import MultiSelectField
 
 
-class StuActCenterApply(RoomApply, DateMixin):
+class StuActCenterApp(RoomApplication, DateMixin):
 
     TIME = (
         (u'早上', u'早上'),

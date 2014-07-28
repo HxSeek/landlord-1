@@ -16,3 +16,4 @@ class MultiSelectFormField(forms.MultipleChoiceField):
                 'You must select a maximum of %s choice%s.' \
                  % (apnumber(self.max_choices), pluralize(self.max_choices)))
         return value
+
