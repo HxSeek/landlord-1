@@ -37,7 +37,6 @@ class RoomApplication(models.Model):
     applicant_college = models.CharField(max_length=50)
     applicant_phone_number = models.CharField(max_length=30)
     application_time = models.DateTimeField(auto_now_add=True)
-    remarks = models.CharField(max_length=300, blank=True, null=True)
     approved = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
 

@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'landlord.account',
     'landlord.common',
     'landlord.stu_act',
+    'landlord.mroom',
 )
 
 

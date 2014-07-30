@@ -5,6 +5,9 @@ from .views import ApplyRoomView, ListView, ModifyView
 from landlord.stu_act.forms import StuActCenterAppForm
 from landlord.stu_act.models import StuActCenterApp
 
+from landlord.mroom.forms import MroomAppForm
+from landlord.mroom.models import MroomApp
+
 
 urlpatterns = patterns(
     '',
@@ -18,4 +21,15 @@ urlpatterns = patterns(
     url(r'^modify/student_activity_center/$', ModifyView.as_view(),
         {'appform': StuActCenterAppForm,
          'model': StuActCenterApp}, name='Stumodify'),
+
+    url(r'^apply/meeting_room/$', ApplyRoomView.as_view(),
+        {'appform': MroomAppForm,
+         'model': MroomApp}, name='Mroomapply'),
+
+    url(r'^list/meeting_room/$', ListView.as_view(),
+        {'model': MroomApp}, name='Mroomlist'),
+
+    url(r'^modify/meeting_room/$', ModifyView.as_view(),
+        {'appform': MroomAppForm,
+         'model': MroomApp}, name='Mroommodify'),
 )
