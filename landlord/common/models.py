@@ -3,23 +3,31 @@ from django.db import models
 from django.contrib.auth.models import Group
 
 from landlord.account.models import Organization
+from .strategies import make_strategy_by_ident, make_strategy_choices
 
 
 class Room(models.Model):
     """The meeting room entity."""
     FIELDS = (
-        ('stuact', '学生活动中心'),
-        ('exhibit', '校园展览'),
-        ('publicity', '校园露天'),
-        ('mroom', '会议室'),
+        (u'stuact', u'学生活动中心'),
+        (u'exhibit', u'校园展览'),
+        (u'publicity', u'校园露天'),
+        (u'mroom', u'会议室'),
     )
+
+    STRATEGY_CHOICES = make_strategy_choices()
 
     name = models.CharField(max_length=32)
     managers = models.ManyToManyField(Group)
     belong_to = models.CharField(max_length=10, choices=FIELDS)
+    strategy_ident = models.IntegerField(choices=STRATEGY_CHOICES)
 
     def __unicode__(self):
         return self.name
+
+    def select_strategy(self, applicant):
+        strategy = make_strategy_by_ident(self.strategy_ident, self)
+        strategy.validate(applicant)
 
     def judge_perms(self, managers, user):
         groups = user.groups.all()

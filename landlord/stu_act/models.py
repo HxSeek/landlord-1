@@ -27,4 +27,6 @@ class StuActCenterApp(RoomApplication, DateMixin):
 
         self.clean_date()
 
+        self.place.select_strategy(self)
+
         return self.save()
