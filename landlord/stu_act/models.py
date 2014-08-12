@@ -16,7 +16,7 @@ class StuActCenterApp(RoomApplication, DateMixin):
     )
 
     time = MultiSelectField(max_length=50, choices=TIME)
-    place = models.ForeignKey(Room, limit_choices_to=Q(belong_to='stuact'))
+    place = models.ForeignKey(Room)
     activity = models.CharField(max_length=30)
     activity_summary = models.CharField(max_length=200)
     sponsor = models.CharField(max_length=30, blank=True, null=True)

@@ -1,0 +1,107 @@
+<html>
+<head>
+    <style>
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: #e2ebfe;
+    font-family: "宋体";
+}
+.nav{
+    width: 100%;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+    font-size: 0px;
+}
+.nav-content{
+    font-size: 12px;
+    color:#000000; 
+    line-height: 30px;
+    vertical-align: middle;
+}
+.name,.time{
+    display: inline-block;
+    width: 30%;
+}
+.week{
+    display: inline-block;
+    width: 25%;
+}
+.choice{
+    display: inline-block;
+    width: 15%;
+}
+.nav a{
+    color: #4d6ff7;
+    text-decoration: none;
+}
+table.app_table{
+    width: 100%;
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+    border-collapse:collapse;
+}
+.app_table td{
+    border: 2px #ffffff solid;
+}
+.grey{
+    background-color: #cccccc;
+}
+.red{
+    background-color:#ff7766;
+}
+.blue{
+    background-color: #e2ebfe;
+}
+
+    </style>
+</head>
+
+<body>
+
+{% for place, apps_every_place in table.content %}
+<table class="app_table">
+    <tr>
+        <td colspan="2"></td>
+        {% for time in table.time_list %}
+        <td>{{ time }}</td>
+        {% endfor %}
+    </tr>
+
+    {% for app_every_day in apps_every_place %}
+    {% cycle table.date.0 table.date.1 table.date.2 table.date.3 table.date.4 table.date.5 table.date.6 as date silent %}
+    <tr>
+        {% if forloop.first %}
+        <td rowspan="7">
+            {{place}}
+            <div style="color: #ff0000;">
+                {% if place == '石头坞一楼会议室' %}
+                    (学生会托管)
+                {% elif place == '石头坞二楼会议室' %}
+                    (社联托管)
+                {% elif place == '学生活动中心305会议室' %}
+                    (暂时作为仓库，短期内不启用)
+                {% endif %}
+            </div>
+        </td>
+        {% endif %}
+
+        <td>{{ date }}</td>
+        {% for app in app_every_day %}
+            {% if app %}
+            <td class="red"></td>
+            {% else %}
+            <td class="blue"></td>
+            {% endif %}
+        {% endfor %}
+    </tr>    
+    {% endfor %}
+</table>
+{% endfor %}
+
+</body>
+</html

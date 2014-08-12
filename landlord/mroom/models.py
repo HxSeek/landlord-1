@@ -41,7 +41,7 @@ class MroomApp(RoomApplication, DateMixin):
     TIME = generate_time_choices()
 
     time = MultiSelectField(max_length=400, choices=TIME)
-    place = models.ForeignKey(Room, limit_choices_to=Q(belong_to='mroom'))
+    place = models.ForeignKey(Room)
     meeting_topic = models.CharField(max_length=50)
     meeting_summary = models.CharField(max_length=200)
     remarks = models.CharField(max_length=300, blank=True, null=True)

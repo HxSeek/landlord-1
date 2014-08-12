@@ -7,6 +7,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from landlord.common.models import Field
+
 
 class ApplyRoomView(View):
 
@@ -27,6 +29,14 @@ class ApplyRoomView(View):
         model.organization = request.user.organization
         model.submit()
         return HttpResponseRedirect(reverse('home'))
+
+
+class table(View):
+
+    def get(self, request, model, template, name):
+        field = Field.objects.get(name__exact=name)
+        table = field.generate_table(model)
+        return render(request, template, {'table': table})
 
 
 class ListView(View):
