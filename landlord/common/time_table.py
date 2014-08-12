@@ -3,6 +3,9 @@
     the strategies for choosing the time_table
 '''
 import copy
+from datetime import time
+
+from django.utils.dateformat import time_format
 
 from landlord.custom.table_util import generate_date_list
 from landlord.custom.table_util import get_application_this_week
@@ -10,10 +13,10 @@ from landlord.custom.table_util import get_application_this_week
 
 def generate_time_choices():
     '''
-        '8点-8点30分', '8点-8点30分'),
-        '8点30分-9点', '8点30分-9点'),
+        (time(8,0), '8点-8点30分'),
+        (time(8,30), '8点30分-9点'),
         ...
-        '22点30分-23点', '22点30分-23点'),
+        (time(22,30), '22点30分-23点'),
     '''
 
     s = [8, 0, 30, u'点', u'点30分']
@@ -26,7 +29,7 @@ def generate_time_choices():
         else:
             t = str(x) + a + '-' + str(x) + b
 
-        TIME.append((t, t))
+        TIME.append((time_format(time(x, y), 'H:i:s'), t))
 
         if y == 30:
             x += 1
@@ -96,7 +99,7 @@ class Mroom_Table(Table):
         TIME = generate_time_choices()
 
         table = {}
-        empty_time_dict = {time: None for time in TIME}
+        empty_time_dict = {time: None for time, l in TIME}
 
         for short_name, full_name in PLACE:
             table[full_name] = \
@@ -110,13 +113,13 @@ class Mroom_Table(Table):
         for l, place in PLACE:
             for day in range(7):
                 table[place][day] = \
-                            [table[place][day][time] for time in TIME]
+                            [table[place][day][time] for time, l in TIME]
 
         # sorted by place
         content = [(place, table[place]) for l, place in PLACE]
 
         return {'date': generate_date_list(),
-                'time_list': tuple(time for time, t in TIME),
+                'time_list': tuple(l for time, l in TIME),
                 'content': content}
 
 
