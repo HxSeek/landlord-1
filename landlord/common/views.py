@@ -31,7 +31,7 @@ class ApplyRoomView(View):
         return HttpResponseRedirect(reverse('home'))
 
 
-class table(View):
+class Table(View):
 
     def get(self, request, model, template, name):
         field = Field.objects.get(name__exact=name)

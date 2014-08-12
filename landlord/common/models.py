@@ -31,7 +31,6 @@ class Room(models.Model):
     STRATEGY_CHOICES = make_strategy_choices()
 
     name = models.CharField(max_length=32)
-    '''managers = models.ManyToManyField(Group)'''
     field = models.ForeignKey(Field)
     strategy_ident = models.IntegerField(choices=STRATEGY_CHOICES)
 
@@ -41,15 +40,6 @@ class Room(models.Model):
     def select_strategy(self, applicant):
         strategy = make_strategy_by_ident(self.strategy_ident, self)
         strategy.validate(applicant)
-
-'''
-    def judge_perms(self, managers, user):
-        groups = user.groups.all()
-        managers_list = [str(manager) for manager in managers.all()]
-
-        for group in groups:
-            return bool(str(group) in managers_list)
-'''
 
 
 class RoomApplication(models.Model):

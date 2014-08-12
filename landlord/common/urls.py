@@ -1,6 +1,6 @@
 from django.conf.urls import url, patterns
 
-from .views import ApplyRoomView, ListView, ModifyView, table
+from .views import ApplyRoomView, ListView, ModifyView, Table
 
 from landlord.stu_act.forms import StuActCenterAppForm
 from landlord.stu_act.models import StuActCenterApp
@@ -20,7 +20,7 @@ urlpatterns = patterns(
         {'model': StuActCenterApp,
          'name': 'Stumodify'}, name='Stulist'),
 
-    url(r'^table/student_activity_center/$', table.as_view(),
+    url(r'^table/student_activity_center/$', Table.as_view(),
         {'model': StuActCenterApp,
          'template': 'stu_table.html',
          'name': 'stuact'}, name='Stutable'),
@@ -39,7 +39,7 @@ urlpatterns = patterns(
         {'model': MroomApp,
          'name': 'Mroommodify'}, name='Mroomlist'),
 
-    url(r'^table/meeting_room/$', table.as_view(),
+    url(r'^table/meeting_room/$', Table.as_view(),
         {'model': MroomApp,
          'template': 'mroom_table.html',
          'name': 'mroom'}, name='Mroomtable'),
