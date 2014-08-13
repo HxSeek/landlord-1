@@ -3,9 +3,19 @@
     <body>
 
         {% for app in page %}
+
+           {% if name == 'Stumodify' %} 
            <a href="{% url 'common:Stumodify' %}?id={{ app.id }}">
                 编辑
            </a>
+           {% endif %}
+           
+           {% if name == 'Mroommodify' %}
+            <a href="{% url 'common:Mroommodify' %}?id={{ app.id }}">
+                编辑
+           </a>
+           {% endif %}
+
         {% endfor %}
 
         {% if page.has_previous %}

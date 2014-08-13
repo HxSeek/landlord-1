@@ -3,15 +3,16 @@ from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from django.forms import Textarea
 
-from .models import StuActCenterApp
+from .models import MroomApp
 
 
-class StuActCenterAppForm(forms.ModelForm):
+class MroomAppForm(forms.ModelForm):
 
     class Meta:
-        model = StuActCenterApp
+        model = MroomApp
         exclude = ['organization', 'application_time', 'approved', 'deleted']
         widgets = {
             'date': SelectDateWidget(),
-            'activity_summary': Textarea(),
+            'meeting_summary': Textarea(),
+            'remarks': Textarea(),
         }
