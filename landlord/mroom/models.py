@@ -10,30 +10,25 @@ from landlord.custom.model_field import MultiSelectField
 
 
 def generate_time_choices():
-    '''
-        (time(8,0), '8点-8点30分'),
-        (time(8,30), '8点30分-9点'),
-        ...
-        (time(22,30), '22点30分-23点'),
-    '''
+    """为 checkbox 标签生成时间选项
 
-    s = [8, 0, 30, u'点', u'点30分']
-    TIME = []
-    for i in range(30):
-        x, y, z, a, b = s
+    :returns: 返回 list.
+              [(time(8,0), '8点-8点30分'),
+               (time(8,30), '8点30分-9点'),
+                ...
+               (time(22,30), '22点30分-23点'),]
+    """
+    def create_format(lha, rha):
+        return time_format(time(lha, rha), 'H:i:s')
 
-        if y == 30:
-            t = str(x) + a + '-' + str(x + 1) + b
-        else:
-            t = str(x) + a + '-' + str(x) + b
+    choices = list()
+    ptn = u'%d点-%d点30分'
+    ptn_half = u'%d点30分-%d点'
+    for i in xrange(8, 23):
+        choices.append((create_format(i, 0), ptn % (i, i)))
+        choices.append((create_format(i, 30), ptn_half % (i, i + 1)))
 
-        TIME.append((time_format(time(x, y), 'H:i:s'), t))
-
-        if y == 30:
-            x += 1
-
-        s = [x, z, y, b, a]
-    return TIME
+    return choices
 
 
 class MroomApp(RoomApplication, DateMixin):

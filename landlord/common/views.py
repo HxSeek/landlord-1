@@ -42,6 +42,8 @@ class Table(View):
 
 
 def generate_page(listing, request):
+    for app in listing:
+        app.date = app.date.strftime('%Y年%m月%d日')
     paginator = Paginator(listing, 40)
     try:
         page = paginator.page(request.GET.get('page'))
@@ -52,23 +54,57 @@ def generate_page(listing, request):
 
 class ListAppView(View):
 
-    def get(self, request, model, title):
+    def get(self, request, model, title, name):
         listing = model.objects.all().order_by('id')
         return render(request, 'room/list.html',
-                               {'page': generate_page(listing, request),
+                               {'manage_url': reverse('common:%s' % name),
+                                'page': generate_page(listing, request),
                                 'title': title,
                                 'form': SearchForm()})
 
-    def post(self, request, model, title):
+    def post(self, request, model, title, name):
         form = SearchForm(request.POST)
         if not form.is_valid():
             listing = model.objects.all().order_by('id')
         else:
             listing = search_application(model, form).order_by('id')
         return render(request, 'list.html',
-                               {'page': generate_page(listing, request),
+                               {'manage_url': reverse('common:%s' % name),
+                                'page': generate_page(listing, request),
                                 'title': title,
                                 'form': form})
+
+
+class ManageView(View):
+
+    @method_decorator(login_required)
+    def get(self, request, model, title, name1, name2, name3):
+        return ManageView.manage(request, model.objects.all(),
+                                 SearchForm(), title, name1, name2, name3)
+
+    @method_decorator(login_required)
+    def post(self, request, model, title, name1, name2, name3):
+        form = SearchForm(request.POST)
+        if not form.is_valid():
+            listing = \
+                model.objects.all().order_by('id')
+        else:
+            listing = search_application(model, form)
+
+        return ManageView.manage(request, listing, form, title, name1,
+                                 name2, name3)
+
+    @classmethod
+    def manage(cls, request, listing, form, title, name1,
+               name2, name3):
+        listing = listing.order_by('id')
+        page = generate_page(listing, request)
+        return render(request, 'manage.html', {'page': page,
+                               'title': title,
+                               'modify_url': reverse('common:%s' % name1),
+                               'approve_url': reverse('common:%s' % name2),
+                               'delete_url': reverse('common:%s' % name3),
+                               'form': form})
 
 
 class ModifyView(View):
@@ -96,3 +132,22 @@ class ModifyView(View):
         model = form.save(commit=False)
         model.submit()
         return HttpResponseRedirect(reverse('home'))
+
+
+class Delete(View):
+    @method_decorator(login_required)
+    def delete(self, request, model):
+        app_id = request.GET.get('id')
+        app = get_object_or_404(model, id=app_id)
+        app.delete()
+        return HttpResponseRedirect(reverse('common:deleted'))
+
+
+class Approved(View):
+        @method_decorator(login_required)
+        def manager_approve(self, request, model):
+            app_id = request.GET.get('id')
+            app = get_object_or_404(model, id=app_id)
+            app.approved = not app.approved
+            app.submit()
+            return HttpResponseRedirect(reverse('common:approved'))

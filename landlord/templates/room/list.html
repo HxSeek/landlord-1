@@ -1,24 +1,32 @@
 <html>
+<head>
+    <style>
+    </style>
+</head>
 
     <body>
+    
+        <a href="{{ manage_url }}">【管理场地申请】</a>
 
         <h1>{{ title }}</h1>
+        
+        <div class="search">
+            <form action="" method="post">
+                <a href="."><input type="button" value="显示全部" /></a>
+                {% csrf_token %}
 
-        <form action="" method="post">
-            <a href="."><input type="button" value="显示全部" /></a>
-            {% csrf_token %}
+                {{ form.search_type }}
 
-            {{ form.search_type }}
+                {{ form.search_value }}
 
-            {{ form.search_value }}
-
-            {{ form.approved }}
+                {{ form.approved }}
  
-            <input type="submit" value="提交" />
-        </form>
+                <input type="submit" value="提交" />
+            </form>
+        </div>
     
     <table>
-        <tr>
+        <tr class="table">
             <td style="min-width:100px">申请组织</td>
             <td style="min-width:100px">活动主题</td>
             <td style="min-width:150px">使用场地</td>
@@ -29,7 +37,7 @@
         </tr>
 
         {% for app in page %}
-        <tr>
+        <tr class="app">
             <td>{{ app.organization }}</td>
             <td>{{ app.activity }}</td> 
             <td>{{ app.place }}</td>

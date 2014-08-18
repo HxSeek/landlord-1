@@ -40,7 +40,7 @@ def search_application(model, form):
             apps = model.objects.filter(place__name__exact=search_value)
     else:
         raise Exception('search_type is not valid')
-'''
+
     if approved_value == 'all':
         return apps
     elif approved_value == 'yes':
@@ -49,4 +49,3 @@ def search_application(model, form):
         return apps.filter(approved=False)
     else:
         raise Exception('approved_value is not valid')
-'''
