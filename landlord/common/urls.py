@@ -31,9 +31,9 @@ urlpatterns = patterns(
     url(r'^manage/student_activity_center/$', ManageView.as_view(),
         {'model': StuActCenterApp,
          'title': u'学生活动中心场地申请',
-         'name1': 'Stumodify',
-         'name2': 'Studeleted',
-         'name3': 'Stuapproved'}, name='Stumanage'),
+         'mname': 'Stumodify',
+         'dname': 'Studeleted',
+         'aname': 'Stuapproved'}, name='Stumanage'),
 
     url(r'^modify/student_activity_center/$', ModifyView.as_view(),
         {'appform': StuActCenterAppForm,
@@ -41,10 +41,12 @@ urlpatterns = patterns(
          'name': 'Stumodify'}, name='Stumodify'),
 
     url(r'deleted/$', Delete.as_view(),
-        {'model': StuActCenterApp}, name='Studeleted'),
+        {'model': StuActCenterApp,
+         'name': 'Studeleted'}, name='Studeleted'),
 
     url(r'approved/$', Approved.as_view(),
-        {'model': StuActCenterApp}, name='Stuapproved'),
+        {'model': StuActCenterApp,
+         'name': 'Stuapproved'}, name='Stuapproved'),
 
     url(r'^apply/meeting_room/$', ApplyRoomView.as_view(),
         {'appform': MroomAppForm,
@@ -64,9 +66,9 @@ urlpatterns = patterns(
     url(r'^manage/meeting_room/$', ManageView.as_view(),
         {'model': MroomApp,
          'title': u'会议室使用申请',
-         'name1': 'Mroommodify',
-         'name2': 'Mroomdeleted',
-         'name3': 'Mroomapproved'}, name='Mroommanage'),
+         'mname': 'Mroommodify',
+         'dname': 'Mroomdeleted',
+         'aname': 'Mroomapproved'}, name='Mroommanage'),
 
     url(r'^modify/meeting_room/$', ModifyView.as_view(),
         {'appform': MroomAppForm,
@@ -74,8 +76,10 @@ urlpatterns = patterns(
          'name': 'Mroommodify'}, name='Mroommodify'),
 
     url(r'deleted/$', Delete.as_view(),
-        {'model': MroomApp}, name='Mroomdeleted'),
+        {'model': MroomApp,
+         'name': 'Mroomdeleted'}, name='Mroomdeleted'),
 
     url(r'approved/$', Approved.as_view(),
-        {'model': MroomApp}, name='Mroomapproved'),
+        {'model': MroomApp,
+         'name': 'Mroomapproved'}, name='Mroomapproved'),
 )
