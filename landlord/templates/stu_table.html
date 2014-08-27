@@ -1,29 +1,76 @@
 <html>
 <head>
     <style>
-        .application_exist{
-            width: 50px;
-            height: 50px;
-            background-color: green;
-        }
-        .application_pass{
-            width: 50px;
-            height: 50px;
-            background-color: red;
-        }
-        a{ display: block; }
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: #e2ebfe;
+    font-family: "宋体";
+}
+.nav{
+    width: 100%;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+    font-size: 0px;
+}
+.nav-content{
+    font-size: 12px;
+    color:#000000; 
+    line-height: 30px;
+    vertical-align: middle;
+}
+.name,.time{
+    display: inline-block;
+    width: 30%;
+}
+.week{
+    display: inline-block;
+    width: 25%;
+}
+.choice{
+    display: inline-block;
+    width: 15%;
+}
+.nav a{
+    color: #4d6ff7;
+    text-decoration: none;
+}
+table.app_table{
+    width: 100%;
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+    border-collapse:collapse;
+}
+.app_table td{
+    border: 2px #ffffff solid;
+}
+.grey{
+    background-color: #A8A8A8;
+}
+.red{
+    background-color:#ff7766;
+}
+.blue{
+    background-color: #e2ebfe;
+}
     </style>
 </head>
 
 <body>
 
+<a href="{% url 'common:Stulist' %}">【文字版】</a>
+
 <h1>table</h1>
     <table>
-        <tr>
+
         {% for date in table.date %}
         {{ date }}
         {% endfor %}
-        </tr>
+        
         {% for place, apps_every_week in table.content %}
         <tr>
             <td>{{ place }}</td>
@@ -31,13 +78,9 @@
                 {% for app in apps_every_day %}
                     <td> 
                     {% if app %}
-                        <div class="application_pass">
-                        {{ app.activity }}
-                        {{ app.pk }}
-                        </div>
+                        <td class="red"></td>
                     {% else %}
-                        <div class="application_exist">
-                        </div>
+                        <td class="blue"></td>
                     {% endif %}
                     </td> 
                 {% endfor %}

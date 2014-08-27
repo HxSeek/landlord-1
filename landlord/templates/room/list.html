@@ -1,23 +1,60 @@
 <html>
+<head>
+    <style>
+    </style>
+</head>
 
     <body>
+    
+        <a href="{{ manage_url }}">【管理场地申请】</a>
+
+        <h1>{{ title }}</h1>
+        
+        <div class="search">
+            <form action="" method="post">
+                <a href="."><input type="button" value="显示全部" /></a>
+                {% csrf_token %}
+
+                {{ form.search_type }}
+
+                {{ form.search_value }}
+
+                {{ form.approved }}
+ 
+                <input type="submit" value="提交" />
+            </form>
+        </div>
+    
+    <table>
+        <tr class="table">
+            <td style="min-width:100px">申请组织</td>
+            <td style="min-width:100px">活动主题</td>
+            <td style="min-width:150px">使用场地</td>
+            <td style="width:95px">使用日期</td>
+            <td style="min-width:100px">使用时间</td>
+            <td style="width:90px">申请时间</td>
+            <td style="width:70px">是否审批</td>
+        </tr>
 
         {% for app in page %}
-
-           {% if name == 'Stumodify' %} 
-           <a href="{% url 'common:Stumodify' %}?id={{ app.id }}">
-                编辑
-           </a>
-           {% endif %}
-           
-           {% if name == 'Mroommodify' %}
-            <a href="{% url 'common:Mroommodify' %}?id={{ app.id }}">
-                编辑
-           </a>
-           {% endif %}
-
+        <tr class="app">
+            <td>{{ app.organization }}</td>
+            <td>{{ app.activity }}</td> 
+            <td>{{ app.place }}</td>
+            <td>{{ app.date | date:"Y年n月d日" }}</td>
+            <td>{% for l, time in app.time %} {{ time }} {% endfor %}</td>
+            <td>{{ app.application_time | date:"Y年n月d日G时i分" }}</td>
+            <td>
+                {% if app.approved %}
+                    <span style="color: #ff0000;">已批准</span>
+                {% else %}
+                    未批准
+                {% endif %}
+            </td>
+        </tr>
         {% endfor %}
-
+    </table>
+                
         {% if page.has_previous %}
         <a href="?page={{ page.previous_page_number }}">previous</a>
         {% endif %}
@@ -27,7 +64,7 @@
         {% if page.has_next %}
         <a href="?page={{ page.next_page_number }}">next</a>
         {% endif %}
-
+  
     </body>
 
 </html>
