@@ -1,6 +1,5 @@
 #-*- coding: utf-8 -*-
 from django import forms
-from landlord.mroom.models import MroomApp
 
 
 class SearchForm(forms.Form):
@@ -28,18 +27,19 @@ def search_application(model, form):
     approved_value = form.cleaned_data['approved']
 
     search_value = '%' + '%'.join(search_value) + '%'
+
     if search_type == 'org':
         apps = model.objects.filter(
             organization__chinese_name__exact=search_value)
     elif search_type == 'title':
-        if model == MroomApp:
+        if model.__class__ == 'MroomApp':
             apps = model.objects.filter(meeting_topic__exact=search_value)
         else:
             apps = model.objects.filter(activity__exact=search_value)
     elif search_type == 'place':
             apps = model.objects.filter(place__name__exact=search_value)
     else:
-        raise Exception('search_type is not valid')
+        raise ValueError('search_type is not valid')
 
     if approved_value == 'all':
         return apps
@@ -48,4 +48,4 @@ def search_application(model, form):
     elif approved_value == 'no':
         return apps.filter(approved=False)
     else:
-        raise Exception('approved_value is not valid')
+        raise ValueError('approved_value is not valid')

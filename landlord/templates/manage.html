@@ -38,7 +38,7 @@
             <td>{{ app.organization }}</td>
             <td>{{ app.activity }}</td> 
             <td>{{ app.place }}</td>
-            <td>{{ app.date }}</td>
+            <td>{{ app.date | date:'Y年n月d日' }}</td>
             <td>{% for l, time in app.time %} {{ time }} {% endfor %}</td>
             <td>{{ app.application_time | date:"Y年n月d日G时i分" }}</td>
             <td>

@@ -47,8 +47,6 @@ class Table(View):
 
 
 def generate_page(listing, request):
-    for app in listing:
-        app.date = app.date.strftime('%Y年%m月%d日')
     paginator = Paginator(listing, 40)
     try:
         page = paginator.page(request.GET.get('page'))
@@ -136,11 +134,10 @@ class ModifyView(View):
         name = kwargs['name']
         app = get_object_or_404(model, id=app_id)
         form = kwargs['appform'](instance=app)
-        post_url = reverse('common:%s' % name) + '?id=' + app_id
+        post_url = reverse('common:%s?id=%d' % (name, app_id))
 
         return render(request, 'room/form.html',
-                      {'form': form, 'app_id': app_id,
-                       'post_url': post_url})
+                      {'form': form, 'post_url': post_url})
 
     @method_decorator(login_required)
     def post(self, request, **kwargs):
@@ -150,10 +147,9 @@ class ModifyView(View):
         app = get_object_or_404(model, id=app_id)
         form = kwargs['appform'](request.POST, instance=app)
         if not form.is_valid():
-            post_url = reverse('common:%s' % name) + '?id=' + app_id
+            post_url = reverse('common:%s?id=%d' % (name, app_id))
             return render(request, 'room/form.html',
-                          {'form': form, 'app_id': app_id,
-                           'post_url': post_url})
+                          {'form': form, 'post_url': post_url})
         model = form.save(commit=False)
         model.submit()
         return HttpResponseRedirect(reverse('home'))
